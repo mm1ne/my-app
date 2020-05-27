@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {background: white;}
+
+ul {
+  list-style: none;
+}
+
+.join-block {
+  margin-top: 30px;
+}
+
+.join-block input {
+  width: 400px;
+  height: 35px;
+  text-align: center;
+  margin: 10px;
+}
+
+.btn-join {
+  width: 200px;
+}
+
+.users_block {
+  background: #FAFAFA;
+  height: 850px;
+}
+.chat-messages {
+  height: 850px;
+  background: #fcfcfc;
+}
+.messages {
+  margin-top: 10px;
+  height: 85%;
+}
+textarea {
+  resize: none;
+}
+.message {
+  max-width: 1000px;
+
+  height: auto;
+  background: rgba(90, 83, 189, .25);
+  word-wrap: break-word;
+}
+
+
