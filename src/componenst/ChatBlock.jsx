@@ -4,7 +4,9 @@ import socket from '../socket'
 function Chat({users , messages, userName, roomId, addNewMessage}) {
 
     const [messageValue, setMessageValue] = React.useState('');
-    
+    const messagesRef = React.useRef(null);
+
+
     const onSendMessage = () => {
         socket.emit('ROOM:NEW_MESSAGE', {
             userName,
@@ -16,7 +18,11 @@ function Chat({users , messages, userName, roomId, addNewMessage}) {
             text: messageValue
         })
         setMessageValue('')
-    }
+    };
+
+    React.useEffect(() => {
+        messagesRef.current.scrollTo(0, 99999);
+    }, [messages])
     
     
   return (
@@ -37,7 +43,7 @@ function Chat({users , messages, userName, roomId, addNewMessage}) {
             </div>
             <div className="chat-messages border col-10">
 
-            <div className="messages d-flex flex-column ">
+            <div ref={messagesRef} className="messages d-flex flex-column ">
                 {
                 
                     messages.map((message) => {
