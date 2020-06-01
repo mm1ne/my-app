@@ -1,7 +1,7 @@
 import React from 'react';
 import socket from './socket'
 import './App.css';
-import axios from 'axios'
+import API from 'axios'
 import reducer from './reducer'
 import JoinBlock from './componenst/JoinBlock'
 import Chat from './componenst/ChatBlock'
@@ -10,6 +10,7 @@ import Chat from './componenst/ChatBlock'
 
 function App() {
 
+
   const [state, dispatch] = React.useReducer(reducer, {
     joined: false,
     roomId: null,
@@ -17,14 +18,14 @@ function App() {
     users: [],
     messages: [],
   })
-
+//  в JOINED происходит псевдоавторизаци, через гет получаем users и messages из нужной комнаты
   const onLogin = async (obj) => {
     dispatch({
       type: 'JOINED',
       payload: obj,
     });
     socket.emit('ROOM:JOIN' , obj)
-   const { data } = await axios.get(`/rooms/${obj.roomId}`);
+   const { data } = await API.get(`/rooms/${obj.roomId}`);
    dispatch({
      type: 'SET_DATA',
      payload: data
@@ -62,7 +63,7 @@ function App() {
 
   return (
     <div className="container-fluid">
-      
+      {/* JoinBlock - авторизация. Chat - окно чата */}
      {!state.joined ? <JoinBlock onLogin={onLogin} /> : <Chat {...state} addNewMessage={addNewMessage}/>}
      
     </div>

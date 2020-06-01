@@ -1,29 +1,38 @@
-import React, {Fragment} from 'react';
-import socket from '../socket'
-import axios from 'axios'
+import React from 'react';
+import API from 'axios'
 
 
 
 
 function JoinBlock( {onLogin} ) {
 
+
+
     const [roomId, setRoomId] = React.useState('');
     const [userName, setUserName] = React.useState('');
     const [isLoadind, setLoading] = React.useState(false);
 
+    
+
     const onEnter = async () => {
       if (!roomId || !userName) {
-       return  alert("ВВЕДИ СВОЙ НИК ИЛИ КОМНАТУ УБЛЮДОК")
+       return  alert("Введите комнату и никнейм")
       }
       const obj = {
         roomId,
         userName
       }
       setLoading(true);
-      await axios
-      .post('/rooms', obj)
-      onLogin(obj);
+      await API
+      // Отправляем на сервер комнату и никнейм
+      .post(`/rooms`, obj) 
+      onLogin(obj)
+      ;
+
       
+      
+
+
     };
 
   return (
